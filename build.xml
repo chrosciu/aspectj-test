@@ -1,0 +1,30 @@
+<project name="AspectProject" default="jar" basedir=".">
+	
+	<taskdef resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties">
+		<classpath>
+	   		<pathelement location="lib/aspectjtools.jar"/>
+	  	</classpath>
+	</taskdef>
+	
+	<path id="classpath">
+		<fileset id="lib" dir="lib">
+			<include name="aspectjrt.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="compile" >
+	    <iajc srcdir="src" destdir="bin" source="1.5" debug="true">
+			<classpath refid="classpath"/>
+			<include name="**/*.java"/>
+	    </iajc>
+	 </target>
+	
+	<target name="jar" depends="compile">
+		<jar destfile="aspect_project.jar" basedir="bin">
+			<manifest>
+				<attribute name="Main-Class" value="com.neubloc.aspect.AspectMain"/>
+			</manifest>
+		</jar>
+	</target>
+	
+</project>
